@@ -1,15 +1,29 @@
 from flask import Flask
 
-from settings import app, db
+from settings import app
 from models import NewsletterSubscription
+from views import (
+	NewsletterSubscriptionCreateView,
+	NewsletterSubscriptionConfirmationView,
+	NewsletterSubscriptionDeleteView
+)
 
 
-@app.route('/')
-def hello_world():
-	ns = NewsletterSubscription(email='admin@example.com')
-	db.session.add(ns)
-	db.session.commit()
-	# NewsletterSubscription.query.filter_by(username='admin').first()
-	# str(NewsletterSubscription.query.all())
-
-	return str(NewsletterSubscription.query.filter_by(email='admin@example.com').first())
+app.add_url_rule(
+	'/newsletter-subscription',
+	view_func=NewsletterSubscriptionCreateView.as_view(
+		'newsletter_subscription__create'
+	)
+)
+app.add_url_rule(
+	'/newsletter-subscription/<slug>/confirm',
+	view_func=NewsletterSubscriptionConfirmationView.as_view(
+		'newsletter_subscription__confirm'
+	)
+)
+app.add_url_rule(
+	'/newsletter-subscription/<slug>',
+	view_func=NewsletterSubscriptionDeleteView.as_view(
+		'newsletter_subscription__delete'
+	)
+)
