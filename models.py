@@ -1,5 +1,5 @@
 from sqlalchemy.sql import func, select
-from settings import db, SLUG_ASCII_CHARS
+from settings import db
 
 
 class NewsletterSubscription(db.Model):
