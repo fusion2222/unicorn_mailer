@@ -1,9 +1,14 @@
 from flask import Flask
-
-
-app = Flask(__name__)
+from settings import app, db
+from models import NewsletterSubscription
 
 
 @app.route('/')
 def hello_world():
-    return 'Hello, World!'
+	
+	ns = NewsletterSubscription(slug='boris', email='admin@example.com')
+	db.session.add(ns)
+	db.session.commit()
+	# NewsletterSubscription.query.filter_by(username='admin').first()
+	
+	return str(NewsletterSubscription.query.all())

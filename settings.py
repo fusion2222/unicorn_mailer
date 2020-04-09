@@ -1,7 +1,8 @@
 import json
 import os
 
-from sqlalchemy import create_engine
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
 
 
 CONF = {}
@@ -13,5 +14,8 @@ if not os.path.isfile('conf.json'):
 with open('conf.json') as f:
 	CONF.update(json.loads(f.read()))
 
-DB_ENGINE = create_engine('sqlite:///db.sqlite3')
-DB_CONNECTION = DB_ENGINE.connect()
+
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
+
+db = SQLAlchemy(app)
