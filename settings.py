@@ -1,4 +1,5 @@
 import json
+import os
 
 
 CONF = {}
@@ -9,5 +10,3 @@ if not os.path.isfile('conf.json'):
 
 with open('conf.json') as f:
 	CONF.update(json.loads(f.read()))
-
-
