@@ -1,7 +1,4 @@
-from flask import Flask
-
 from settings import app
-from models import NewsletterSubscription
 from views import (
 	NewsletterSubscriptionCreateView,
 	NewsletterSubscriptionConfirmationView,

@@ -1,6 +1,5 @@
-from flask import request, url_for, jsonify
+from flask import request, url_for
 from flask.views import View
-from sqlalchemy.sql import exists, expression
 
 from settings import db
 from models import NewsletterSubscription
@@ -56,7 +55,6 @@ class NewsletterSubscriptionDeleteView(View):
 	methods = ['GET', 'DELETE']
 
 	def dispatch_request(self, slug):
-
 		deleted_count = NewsletterSubscription.query.filter_by(slug=slug).delete()
 		db.session.commit()
 		
