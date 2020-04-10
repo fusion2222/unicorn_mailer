@@ -6,7 +6,9 @@ class NewsletterSubscription(db.Model):
     """
     TODO: We use reccommended SQLite's native functions for generating
     slugs. There is extremely unlikely chance for collision. Create
-    collision avoidant DB based function for this.
+    DB based collision avoidant function for handling this.
+
+    And yes, it is possible to make, no excuses.
     """
 
     id = db.Column(db.Integer, primary_key=True)
@@ -17,7 +19,7 @@ class NewsletterSubscription(db.Model):
         default=select([func.lower(func.hex(func.randomblob(16)))])
     )
     email = db.Column(db.String, unique=True, nullable=False)
-    confirmed = db.Column(db.Boolean, nullable=True)
+    confirmed = db.Column(db.Boolean, default=False)
     modified_at = db.Column(db.DateTime(timezone=True), default=func.now())
     created_at = db.Column(db.DateTime(timezone=True), server_default=func.now())
 
