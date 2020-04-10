@@ -5,13 +5,6 @@ if [ ! -d ./.venv ]; then
     virtualenv .venv
 fi
 
-if [ ! -f ./conf.json ]; then
-	cp ./conf.json.example ./conf.json
-	echo "[+] Configure your local conf.json file and execute this script again."
-	echo "[+] Exiting..."
-	exit 1
-fi
-
 source ./.venv/bin/activate
 pip install -r requirements.txt
 
