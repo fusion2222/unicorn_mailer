@@ -30,7 +30,7 @@ For debug mode:
 
 `./run.sh dev`
 
-By default development server starts on `127.0.0.1:5000` 
+By default, development server starts on `127.0.0.1:5000` 
 
 ## URLs
 
@@ -40,4 +40,4 @@ By default development server starts on `127.0.0.1:5000`
 
 ## Technical Note
 
-If you would like to delete all data for testing purposes or something, just delete `db.sqlite3` file and run `./run.sh`.
+If you would like to delete all data for testing purposes or something, just delete `db.sqlite3` file and run `./run.sh` again.
