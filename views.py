@@ -52,7 +52,7 @@ class NewsletterSubscriptionConfirmationView(View):
 
 
 class NewsletterSubscriptionDeleteView(View):
-	methods = ['GET', 'DELETE']
+	methods = ['DELETE']
 
 	def dispatch_request(self, slug):
 		deleted_count = NewsletterSubscription.query.filter_by(slug=slug).delete()
