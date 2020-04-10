@@ -1,10 +1,10 @@
-from flask import abort, request, url_for, make_response
+from flask import request, url_for, jsonify
 from flask.views import View
 from sqlalchemy.sql import exists, expression
 
 from settings import db
 from models import NewsletterSubscription
-from utils import is_email_valid
+from utils import is_email_valid, json_abort
 
 
 class NewsletterSubscriptionCreateView(View):
@@ -12,13 +12,13 @@ class NewsletterSubscriptionCreateView(View):
 
 	def _get_validated_data(self, data):
 		if 'email' not in data:
-			abort(400, 'Field email is missing in your request')
+			json_abort('Field email is missing in your request', 400)
 
 		if not is_email_valid(data['email']):
-			abort(400, 'Provided email has incorrect format')
+			json_abort('Provided email has incorrect format', 400)
 
 		if db.session.query(NewsletterSubscription.query.filter_by(email=data['email']).exists()).scalar():
-			abort(403, 'Provided email has been already subscribed')
+			json_abort('Provided email has been already subscribed', 403)
 
 		return data
 
@@ -47,9 +47,9 @@ class NewsletterSubscriptionConfirmationView(View):
 		db.session.commit()
 
 		if updated_count == 0:
-			abort(403, 'Subscription does not exist or has been already confirmed')
+			json_abort('Subscription does not exist or has been already confirmed', 403)
 
-		return {'msg': 'Newsletter subscription confirmed'}
+		return {'message': 'Newsletter subscription confirmed'}
 
 
 class NewsletterSubscriptionDeleteView(View):
@@ -61,6 +61,6 @@ class NewsletterSubscriptionDeleteView(View):
 		db.session.commit()
 		
 		if deleted_count == 0:
-			abort(403, 'Subscription does not exist or has been already deleted')
+			json_abort('Subscription does not exist or has been already deleted', 403)
 
-		return {'msg': 'Newsletter subscription deleted'}
+		return {'message': 'Newsletter subscription deleted'}
