@@ -22,11 +22,21 @@ In order to run Unicorn Mailer must have following installed:
 
 ## How to run
 
+You can run development server as follows:
+
 `./run.sh`
 
 For debug mode:
 
 `./run.sh dev`
+
+By default development server starts on `127.0.0.1:5000` 
+
+## URLs
+
+- Create subscription - **POST**  `/newsletter-subscription`
+- Confirm subscription -  **GET** `/newsletter-subscription/<slug>/confirm`
+- Delete subscription - **DELETE**  `/newsletter-subscription/<slug>`
 
 ## Technical Note
 
