@@ -1,5 +1,7 @@
 # Unicorn Mailer
 
+![Unicorn](./unicorn.png)
+
 This simple Flask application stores newsletter subscriptions, which subsequently must be confirmed by client.
 
 ## Notes
